@@ -3,24 +3,15 @@
   {
     "/usuario/" : {
       "get": {
-        "description": "Busca todos os Usuários ",
+        "description": "Busca os dados do usuário logado",
         "tags":['Usuário'],
         "security": [
             { "BearerAuth": [] }
           ],
-        "parameters":[
-          {
-          'name': "id",
-          'description': "(OPCIONAL) ID do Usuário",
-          'in': "query",
-         'required':false,
-          "schema": {
-            'type': 'integer'
-          }
-        }],
+        "parameters":[],
         "responses": {
           "200":{
-            "$ref": "#/components/responses/arrayUsuarios"
+            "$ref": "#/components/responses/singleUsuario"
           },
           "500":{
             "$ref": "#/components/responses/genericError"
@@ -151,25 +142,6 @@
         }
      }
    },
-   "/me/": {
-      "post": {
-        "description": "Retorna todos os dados do Usuário Logado. ",
-        "tags":['Login'],
-        "security": [
-          { "BearerAuth": [] }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/singleUsuario"
-          },
-          "500":{
-            "$ref": "#/components/responses/genericError"
-          },
-          "401":{
-            "$ref": "#/components/responses/autenticacaoError"
-          }
-        }
-     }
-    },
+
   }
 */

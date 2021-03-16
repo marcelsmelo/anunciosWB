@@ -35,7 +35,7 @@ module.exports = {
             senha: req.body.senha
         };
 
-        Usuario.update(user, { where: { id: req.body.id } })
+        Usuario.update(user, { where: { id: req.body.id, id: req.user.id } })
             .then(usuario => {
                 res.status(200).json({ msg: "Usuário editado com sucesso" });
             }).catch(error => {
@@ -45,7 +45,8 @@ module.exports = {
     deleteUsuarioById: (req, res, next) => {
         Usuario.destroy({
             where: {
-                id: req.params.id
+                id: req.params.id,
+                id: req.user.id
             }
         }).then((rows) => { //Número de linhas afetadas
             res.status(200).json({ msg: "Usuário removido com sucesso" });

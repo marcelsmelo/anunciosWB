@@ -1,8 +1,15 @@
 const Anuncio = require('../model/Anuncio');
+const Usuario = require('../model/Usuario');
 
 module.exports = {
    getMeusAnuncios: (req, res, next) => {
-      Anuncio.findAll({where: {usuarioId: req.user.id}})
+      Anuncio.findAll({
+         where: {usuarioId: req.user.id},
+         include:[{
+            model: Usuario,
+            attributes: ['id', 'nome', 'telefone']
+         }]
+      })
       .then(anuncios => {
          res.status(200).json(anuncios);
       }).catch(error => {
@@ -10,7 +17,12 @@ module.exports = {
       });
    },
    getTodosAnuncios: (req, res, next) => {
-      Anuncio.findAll().then(anuncios => {
+      Anuncio.findAll({
+         include:[{
+            model: Usuario,
+            attributes: ['id', 'nome', 'telefone']
+         }]
+      }).then(anuncios => {
          res.status(200).json(anuncios);
       }).catch(error => {
          res.status(500).json({ msg: "Erro ao buscar anúncios!", error: error.message });
@@ -19,7 +31,11 @@ module.exports = {
    getAnuncioByID: (req, res, next) => {
       Anuncio.findOne({where: {
          id: req.params.id,
-         usuarioId: req.user.id }
+         usuarioId: req.user.id },
+         include:[{
+            model: Usuario,
+            attributes: ['id', 'nome', 'telefone']
+         }]
       })
      .then(anuncio => {
          res.status(200).json(anuncio);
