@@ -44,11 +44,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 let swaggerDefinition = {
     openapi: '3.0.1',
     info: {
-      title: 'API aplicativo doações', //Nome da API
+      title: 'API aplicativo anúncios', //Nome da API
       version: '1.0.0', //Versão da API
-      description: 'API para desenvolvimento de um aplicativo para intermediar doações durante a pandemia de Covid-19',
+      description: 'API de manipulação de anúncios para as disciplinas do TSI',
     },
-    host: 'localhost:3000', //URL base da API
+    host: 'anuncios.marcelmelo.com.br', //URL base da API
     basePath: '/',
     components: {
         securitySchemes:{

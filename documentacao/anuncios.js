@@ -1,17 +1,17 @@
 /**
 @swagger
   {
-    "/usuario/" : {
+    "/anuncios/" : {
       "get": {
-        "description": "Busca os dados do usuário logado",
-        "tags":['Usuário'],
+        "description": "Busca todos os anuncios cadastrados pelo usuário logado",
+        "tags":['Anúncio'],
         "security": [
             { "BearerAuth": [] }
           ],
         "parameters":[],
         "responses": {
           "200":{
-            "$ref": "#/components/responses/singleUsuario"
+            "$ref": "#/components/responses/arrayAnuncios"
           },
           "500":{
             "$ref": "#/components/responses/genericError"
@@ -25,10 +25,13 @@
         }
       },
       "post": {
-        "description": "Cadastra um novo o usuário",
-        "tags":['Usuário'],
+        "description": "Cadastra um novo o anúncio",
+        "tags":['Anúncio'],
+        "security": [
+            { "BearerAuth": [] }
+          ],
         "parameters":[
-          "$ref": "#/components/parameters/userParam"
+          "$ref": "#/components/parameters/anuncioParam"
         ],
         "responses": {
           "201": {
@@ -40,13 +43,13 @@
         }
       },
       "put":{
-        "description": "Edita os dados do Usuário logado.",
-        "tags":['Usuário'],
+        "description": "Edita um anúncio do Usuário logado.",
+        "tags":['Anúncio'],
         "security": [
             { "BearerAuth": [] }
           ],
-       "parameters":[
-          "$ref": "#/components/parameters/userParam"
+        "parameters":[
+          "$ref": "#/components/parameters/anuncioParam"
         ],
         "responses": {
           "200":{
@@ -61,12 +64,12 @@
         }
       },
       "delete": {
-        "description": "Remove o Usuário logado.",
-        "tags":['Usuário'],
+        "description": "Remove um anúncio do usuário logado.",
+        "tags":['Anúncio'],
         "security": [
             { "BearerAuth": [] }
           ],
-         "parameters":[
+        "parameters":[
           "$ref": "#/components/parameters/idParam"
         ],
         "responses": {
