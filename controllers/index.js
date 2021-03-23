@@ -22,6 +22,7 @@ module.exports = {
             telefone: req.body.telefone,
             senha: req.body.senha
         };
+
         Usuario.create(user).then(usuario => {
             res.status(201).json({ msg: "Usuário criado com sucesso" });
         }).catch(error => {
@@ -29,18 +30,31 @@ module.exports = {
         });
     },
     updateUsuario: (req, res, next) => {
-        const user = {
+        const editedData = {
             nome: req.body.nome,
             telefone: req.body.telefone,
             senha: req.body.senha
         };
 
-        Usuario.update(user, { where: { id: req.body.id, id: req.user.id } })
-            .then(usuario => {
-                res.status(200).json({ msg: "Usuário editado com sucesso" });
-            }).catch(error => {
-                res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message  });
-            });
+        Usuario.findOne({where: {id: req.user.id}}).then( (usuario)=> {
+          usuario.update(editedData).then(editedUser =>{
+            console.log("here")
+            console.log(editedUser)
+            res.status(200).json({ msg: "Usuário editado com sucesso" });
+          })
+          .catch(error =>{
+            res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message  });
+          })
+        })
+        .catch(error => {
+            res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message});
+        });
+        // Usuario.update(user, { where: { id: req.body.id, id: req.user.id } })
+        //     .then(usuario => {
+        //         res.status(200).json({ msg: "Usuário editado com sucesso" });
+        //     }).catch(error => {
+        //         res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message  });
+        //     });
     },
     deleteUsuarioById: (req, res, next) => {
         Usuario.destroy({
