@@ -38,8 +38,6 @@ module.exports = {
 
         Usuario.findOne({where: {id: req.user.id}}).then( (usuario)=> {
           usuario.update(editedData).then(editedUser =>{
-            console.log("here")
-            console.log(editedUser)
             res.status(200).json({ msg: "Usuário editado com sucesso" });
           })
           .catch(error =>{
@@ -49,12 +47,6 @@ module.exports = {
         .catch(error => {
             res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message});
         });
-        // Usuario.update(user, { where: { id: req.body.id, id: req.user.id } })
-        //     .then(usuario => {
-        //         res.status(200).json({ msg: "Usuário editado com sucesso" });
-        //     }).catch(error => {
-        //         res.status(500).json({ msg: "Erro ao editar usuário!", error: error.message  });
-        //     });
     },
     deleteUsuarioById: (req, res, next) => {
         Usuario.destroy({
