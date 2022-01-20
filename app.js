@@ -48,7 +48,7 @@ let swaggerDefinition = {
       version: '1.0.0', //Versão da API
       description: 'API de manipulação de anúncios para as disciplinas do TSI',
     },
-    host: 'anuncios.marcelmelo.com.br', //URL base da API
+    //host: 'anuncios.marcelmelo.com.br', //URL base da API
     basePath: '/',
     components: {
         securitySchemes:{
