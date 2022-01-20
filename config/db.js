@@ -1,20 +1,14 @@
+//require('dotenv-safe').config();
+
 module.exports = {
     /**
      * Local
      */
-    // host: 'localhost',
-    // port: 3306,
-    // database: 'anunciosWB',
-    // username: 'root',
-    // password: ''
 
-    /**
-     * Desenvolvimento
-     */
-    host: 'mysql743.umbler.com',
-    port: 41890,
-    database: 'anuncios_db',
-    username: 'marcelmelo',
-    password: '_x4yC55KU|'
-
+    username: process.env.DB_USER || process.env.DBUSERNAME,
+    password: process.env.DB_PASSWORD || process.env.DBPASSWORD,
+    database: process.env.DB_NAME || process.env.DBDATABASE,
+    host: process.env.DB_HOST || process.env.DBHOST,
+    dialect: process.env.DBDIALECT || 'mysql',
+    port: process.env.DB_PORT || process.env.DBPORT
 }

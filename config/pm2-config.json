@@ -12,6 +12,6 @@
         },
         "log_file": "/var/www/logs/Usuario/log-file.log",
         "log_date_format": "YYYY-MM-DD HH:mm Z",
-        "autorestart": true,
+        "autorestart": true
     }]
 }
