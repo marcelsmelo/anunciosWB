@@ -11,5 +11,5 @@ module.exports = (app) => {
     
     app.post('/login', controller.login);//ok
     app.post('/logout', auth.jwtVerify, controller.logout);//ok
-    //app.get('/me', auth.jwtVerify, controller.meusDados);
+    app.get('/me', auth.jwtVerify, controller.meusDados); 
 }
