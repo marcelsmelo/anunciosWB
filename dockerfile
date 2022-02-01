@@ -14,9 +14,9 @@ RUN npm install
 
 COPY wait-for-it.sh /home/node/app/wait-for-it.sh
 
-COPY . .
+RUN ["chmod", "+x", "/home/node/app/wait-for-it.sh”]
 
-RUN chmod +x /home/node/app/wait-for-it.sh
+COPY . .
 
 #COPY --chown=node:node . .
 
