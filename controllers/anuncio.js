@@ -3,6 +3,7 @@ const Usuario = require('../model/Usuario');
 
 module.exports = {
    getMeusAnuncios: (req, res, next) => {
+      
       Anuncio.findAll({
          where: { usuarioId: req.user.id },
          include: [{
@@ -46,23 +47,31 @@ module.exports = {
          });
    },
    criarAnuncio: (req, res, next) => {
-      const anuncio = {
-         titulo: req.body.titulo,
-         descricao: req.body.descricao,
-         preco: parseDouble(req.body.preco),
-         usuarioId: req.user.id
-      };
-      Anuncio.create(anuncio).then(anuncio => {
-         res.status(201).json({ msg: "Anúncio criado com sucesso" });
-      }).catch(error => {
-         res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.message });
-      });
+      
+      try{
+         const anuncio = {
+            titulo: req.body.titulo,
+            descricao: req.body.descricao,
+            preco: parseFloat(req.body.preco) ,
+            usuarioId: req.user.id
+         };
+      
+         Anuncio.create(anuncio).then(anuncio => {
+            return res.status(201).json({ msg: "Anúncio criado com sucesso" });
+         }).catch(error => {
+            return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.message });
+         });
+      }catch(error){
+         return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.message });
+      }
+      
    },
    editarAnuncio: (req, res, next) => {
-      const anuncio = {
+      try{
+         const anuncio = {
          titulo: req.body.titulo,
          descricao: req.body.descricao,
-         preco: parseDouble(req.body.preco),
+         preco: parseFloat(req.body.preco),
          usuarioId: req.user.id
       };
       Anuncio.update(anuncio, { where: { id: req.body.id } })
@@ -71,6 +80,10 @@ module.exports = {
          }).catch(error => {
             res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.message });
          });
+      }catch(error){
+         return res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.message });
+      }
+      
    },
    removerAnuncio: (req, res, next) => {
       Anuncio.destroy({
