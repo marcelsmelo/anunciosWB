@@ -13,8 +13,8 @@ const Usuario = sequelize.define('usuario', {
         type: Sequelize.STRING(100),
         allowNull: false,
     },
-    telefone: {
-        type: Sequelize.CHAR(20),
+    email: {
+        type: Sequelize.STRING(100),
         allowNull: false,
         unique: true
     },
@@ -69,7 +69,7 @@ Usuario.prototype.generateAuthToken = function() {
       // Generate an auth token for the user
       const usuario = this
       
-      let data = {usuarioId: usuario.id, telefone: usuario.telefone}
+      let data = {usuarioId: usuario.id, email: usuario.email}
 
       //Cria o token
       const token = jwt.sign(

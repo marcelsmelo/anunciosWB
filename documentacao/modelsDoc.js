@@ -7,7 +7,7 @@
           "properties":{
             "id":{"type":"integer"},
             "nome":{"type":"string"},
-            "telefone":{"type":"string"},
+            "email":{"type":"string"},
             "senha":{"type":"string"}
           }
         },

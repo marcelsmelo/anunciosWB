@@ -15,11 +15,11 @@ const Anuncio = sequelize.define('anuncio', {
         defaultValue: false
     },
     descricao: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      defaultValue: false
-  },
-   preco:{
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: false
+    },
+    preco:{
         type: Sequelize.DOUBLE, 
         allowNull: false,
         default: 0.0

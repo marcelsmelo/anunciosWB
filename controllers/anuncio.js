@@ -8,7 +8,7 @@ module.exports = {
          where: { usuarioId: req.user.id },
          include: [{
             model: Usuario,
-            attributes: ['id', 'nome', 'telefone']
+            attributes: ['id', 'nome', 'email']
          }]
       })
          .then(anuncios => {
@@ -21,7 +21,7 @@ module.exports = {
       Anuncio.findAll({
          include: [{
             model: Usuario,
-            attributes: ['id', 'nome', 'telefone']
+            attributes: ['id', 'nome', 'email']
          }]
       }).then(anuncios => {
          res.status(200).json(anuncios);
@@ -37,7 +37,7 @@ module.exports = {
          },
          include: [{
             model: Usuario,
-            attributes: ['id', 'nome', 'telefone']
+            attributes: ['id', 'nome', 'email']
          }]
       })
          .then(anuncio => {

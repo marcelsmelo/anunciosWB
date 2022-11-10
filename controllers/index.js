@@ -2,7 +2,10 @@ const Usuario = require('../model/Usuario');
 
 module.exports = {
     getUsuarios: (req, res, next) => {
-        Usuario.findAll().then(usuarios => {
+        Usuario.findAll({
+          raw: true,
+          attributes: ["id", "nome", "email"]
+        }).then(usuarios => {
             res.status(200).json(usuarios);
         }).catch(error => {
             res.status(500).json({ msg: "Erro ao buscar usuários!", error: error.message});
@@ -10,7 +13,13 @@ module.exports = {
 
     },
     getUsuarioByID: (req, res, next) => {
-        Usuario.findById(req.params.id).then(usuario => {
+        Usuario.findOne({ 
+          where:{
+             id: req.params.id
+          },
+          raw: true,
+          attributes: ["id", "nome", "email"]
+       }).then(usuario => {
             res.status(200).json(usuario);
         }).catch(error => {
             res.status(500).json({ msg: "Erro ao recuperar usuário!", error: error.message  });
@@ -19,7 +28,7 @@ module.exports = {
     createUsuario: (req, res, next) => {
         const user = {
             nome: req.body.nome,
-            telefone: req.body.telefone,
+            email: req.body.email,
             senha: req.body.senha
         };
 
@@ -32,7 +41,7 @@ module.exports = {
     updateUsuario: (req, res, next) => {
         const editedData = {
             nome: req.body.nome,
-            telefone: req.body.telefone,
+            email: req.body.email,
             senha: req.body.senha
         };
 
@@ -63,10 +72,10 @@ module.exports = {
 
     login: (req, res, next)=>{
         Usuario.findOne({
-            where: {telefone: req.body.telefone},
+            where: {email: req.body.email},
           }).then((user)=>{
             if (!user) {
-                //Usuário (telefone) não foi encontrado
+                //Usuário (email) não foi encontrado
                 res.status(500).json({
                   msg: "Usuário não encontrado! Tente novamente",
                   error: null,
@@ -130,6 +139,8 @@ module.exports = {
         where: {
           id: req.user.id
         },
+        raw: true,
+        attributes: ["id", "nome", "email"]
       });
       return res.status(200).json(dados);
     } catch (error) {

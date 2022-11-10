@@ -88,8 +88,8 @@
         "tags":['Login'],
         "parameters":[
           {
-            name: "telefone",
-            description: "Telefone do Usuário ",
+            name: "email",
+            description: "E-mail do Usuário ",
             in: "body",
             requiered:true,
             "schema": {
