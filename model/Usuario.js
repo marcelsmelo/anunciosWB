@@ -12,15 +12,36 @@ const Usuario = sequelize.define('usuario', {
     nome: {
         type: Sequelize.STRING(100),
         allowNull: false,
+        validate: {
+            notEmpty: {
+                msg: 'O campo nome é obrigatório!'
+            },
+            len:{
+                args: [3,50],
+                msg: "O campo nome deve ter entre 3 e 50 caracteres"
+            } 
+        } 
     },
     email: {
         type: Sequelize.STRING(100),
+        unique: true,
+        isEmail: true,
         allowNull: false,
-        unique: true
+        validate: {
+            notEmpty: {
+                msg: 'O campo email é obrigatório!'
+            },
+            len:{
+                args: [5,100],
+                msg: "O campo email deve ter entre 5 e 100 caracteres"
+            } 
+        }
     },
     senha: {
         type: Sequelize.STRING,
         allowNull: false,
+        notEmpty: true,
+        len: [6,18],
         get() {
             return () => this.getDataValue('senha')
         }

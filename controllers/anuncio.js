@@ -14,7 +14,7 @@ module.exports = {
          .then(anuncios => {
             res.status(200).json(anuncios);
          }).catch(error => {
-            res.status(500).json({ msg: "Erro ao buscar anúncios!", error: error.message });
+            res.status(500).json({ msg: "Erro ao buscar anúncios!", error: error.errors[0].message });
          });
    },
    getTodosAnuncios: (req, res, next) => {
@@ -26,7 +26,7 @@ module.exports = {
       }).then(anuncios => {
          res.status(200).json(anuncios);
       }).catch(error => {
-         res.status(500).json({ msg: "Erro ao buscar anúncios!", error: error.message });
+         res.status(500).json({ msg: "Erro ao buscar anúncios!", error: error.errors[0].message });
       });
    },
    getAnuncioByID: (req, res, next) => {
@@ -43,7 +43,7 @@ module.exports = {
          .then(anuncio => {
             res.status(200).json(anuncio);
          }).catch(error => {
-            res.status(500).json({ msg: "Erro ao buscar anúncio!", error: error.message });
+            res.status(500).json({ msg: "Erro ao buscar anúncio!", error: error.errors[0].message });
          });
    },
    criarAnuncio: (req, res, next) => {
@@ -59,10 +59,10 @@ module.exports = {
          Anuncio.create(anuncio).then(anuncio => {
             return res.status(201).json({ msg: "Anúncio criado com sucesso" });
          }).catch(error => {
-            return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.message });
+            return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.errors[0].message });
          });
       }catch(error){
-         return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.message });
+         return res.status(500).json({ msg: "Erro ao criar anúncio!", error: error.errors[0].message });
       }
       
    },
@@ -78,10 +78,10 @@ module.exports = {
          .then(anuncio => {
             res.status(201).json({ msg: "Anúncio editado com sucesso" });
          }).catch(error => {
-            res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.message });
+            res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.errors[0].message });
          });
       }catch(error){
-         return res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.message });
+         return res.status(500).json({ msg: "Erro ao editar anúncio!", error: error.errors[0].message });
       }
       
    },
@@ -94,7 +94,7 @@ module.exports = {
       }).then((rows) => { //Número de linhas afetadas
          res.status(200).json({ msg: "Anúncio removido com sucesso" });
       }).catch(error => {
-         res.status(500).json({ msg: "Erro ao remover anúncio!", error: error.message });
+         res.status(500).json({ msg: "Erro ao remover anúncio!", error: error.errors[0].message });
       });
    },
 };

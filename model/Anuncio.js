@@ -12,17 +12,28 @@ const Anuncio = sequelize.define('anuncio', {
     titulo: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: false
+        validate: {
+            notEmpty: {
+                msg: 'O campo titulo é obrigatório!'
+            },
+            len:{
+                args: [3,100],
+                msg: "O campo titulo deve ter entre 5 e 100 caracteres"
+            } 
+        }
     },
     descricao: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: false
+        validate: {
+            notEmpty: {
+                msg: 'O campo titulo é obrigatório!'
+            }
+        }
     },
     preco:{
         type: Sequelize.DOUBLE, 
-        allowNull: false,
-        default: 0.0
+        allowNull: false
     }
 }, { sequelize, modelName: 'anuncio', tableName: 'anuncios' });
 
