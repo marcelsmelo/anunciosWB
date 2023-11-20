@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 require('./dbMysql')
 
 const Usuario = require('../model/Usuario')

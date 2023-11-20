@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 let swaggerJSDoc = require('swagger-jsdoc');
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
 
 global.logger = require('winston');

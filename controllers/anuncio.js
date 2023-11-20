@@ -92,7 +92,10 @@ module.exports = {
             usuarioId: req.user.id
          }
       }).then((rows) => { //Número de linhas afetadas
-         res.status(200).json({ msg: "Anúncio removido com sucesso" });
+         if(rows > 0)
+            res.status(200).json({ msg: "Anúncio removido com sucesso" });
+         else
+            res.status(500).json({ msg: "Erro ao remover anúncio!", error: "Você não tem acesso para remover o anúncio solicitado!" });
       }).catch(error => {
          res.status(500).json({ msg: "Erro ao remover anúncio!", error: error.errors[0].message });
       });
